@@ -1,257 +1,176 @@
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-//import { ImmersiveForm } from "@/components/ImmersiveForm/ImmersiveForm";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 export default function SponsorshipPage() {
-  return (
-    <main className="min-h-screen bg-black text-white">
-      <section className="relative h-screen overflow-hidden">
-        {/* Cool Animated Gradient Background */}
-        <div
-          className="absolute inset-0 z-10"
-          style={{
-            background:
-              "radial-gradient(circle at center, #000000, #761901, #000000, #000000)",
-            backgroundSize: "200% 200%",
-            animation: "gradientShift 5s ease infinite",
-          }}
-        ></div>
+  const sponsors = [
+    { name: "LIC", image: "/nsponsor/LIC.png" },
+    { name: "Aria", image: "/nsponsor/aria.jpg" },
+    { name: "Herody App", image: "/nsponsor/herody.png" },
+    { name: "GDX", image: "/sponsors/GDX.png" },
+    { name: "StudCops", image: "/sponsors/StudCops.png" },
+    { name: "ReduceIT", image: "/nsponsor/reduceit.jpg" },
+    { name: "BCH", image: "/sponsors/bch.png" },
+    { name: "Nescafe", image: "/sponsors/nescafe.jpg" },
+    { name: "StartupNews.fyi", image: "/nsponsor/startupnews.png" },
+    { name: "Meta", image: "/nsponsor/LIC.png" },
+    { name: "Google", image: "/nsponsor/aria.jpg" },
+    { name: "Microsoft", image: "/nsponsor/herody.png" },
+  ];
 
-        {/* Particle Animation */}
-        <div className="absolute inset-0 z-20 overflow-hidden">
-          {Array.from({ length: 50 }).map((_, index) => (
-            <div
-              key={index}
-              className="absolute rounded-full bg-[#E7000B]/80"
-              style={{
-                width: `${Math.random() * 5 + 2}px`,
-                height: `${Math.random() * 5 + 2}px`,
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animation: `float ${
-                  Math.random() * 5 + 5
-                }s ease-in-out infinite`,
-                animationDelay: `${Math.random() * 5}s`,
-              }}
-            ></div>
-          ))}
+  const marqueeSponsors = [...sponsors, ...sponsors, ...sponsors, ...sponsors];
+
+  return (
+    <main className="relative min-h-screen w-full text-white font-sans selection:bg-[#B52D2D] selection:text-white overflow-x-hidden">
+
+      {/* GLOBAL BACKGROUND - FIXED */}
+      <div className="fixed inset-0 z-0">
+        <div
+          className="absolute inset-0 w-full h-full opacity-60"
+          style={{
+            // Slightly increased blue intensity (approx 7% more)
+            background: "linear-gradient(135deg, #000000 0%, #050525 45%, #000000 65%, #B52D2D 100%)",
+            backgroundSize: "400% 400%",
+            animation: "gradientMove 15s ease infinite alternate"
+          }}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      <style jsx global>{`
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+      `}</style>
+
+      {/* 
+        HERO SECTION 
+      */}
+      <section className="relative h-screen flex flex-col z-10">
+
+        {/* Header */}
+        <header className="flex justify-between items-center px-8 py-6 md:px-16 md:py-8 z-50">
+          <div className="text-3xl font-black tracking-tighter text-[#E62B1E]">
+            TED
+          </div>
+
+          <button className="group flex items-center gap-2 px-6 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium tracking-wide backdrop-blur-sm">
+            TICKETS
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </header>
+
+        {/* Hero Content - Reverted to Centered/Left Layout without Spline */}
+        <div className="flex-grow flex flex-col justify-center px-8 md:px-16 max-w-7xl mx-auto w-full pb-32">
+
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="w-full flex justify-center mb-8"
+          >
+            <h2 className="text-lg md:text-xl font-medium tracking-[0.2em] text-white/80 uppercase">
+              MEET OUR SPONSORS
+            </h2>
+          </motion.div>
+
+          <div className="max-w-3xl">
+            <motion.h1
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-4xl md:text-6xl font-bold leading-[1.2]"
+            >
+              Bigger <span className="text-[#B52D2D]">Goals</span>,<br />
+              Better Together.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-6 text-white/60 text-sm md:text-base max-w-md leading-relaxed"
+            >
+              Empowering individuals and teams at the world's leading organizations. We build the future, one partnership at a time.
+            </motion.p>
+          </div>
         </div>
-        <div className="relative z-20 h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="w-full max-w-4xl mx-auto text-center">
-              <motion.h1
-                className="text-4xl font-bold mb-4 md:mt-10 mt-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                OUR <span className="text-[#FF3A3A]">SPONSORS</span>
-              </motion.h1>
-              <SponsorShowcase />
-              <motion.p
-                className="text-lg mb-8"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              ></motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-              ></motion.div>
-            </div>
+
+        {/* Bottom Ribbon (Marquee) */}
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-black/30 backdrop-blur-sm border-t border-white/5 flex items-center overflow-hidden z-20">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+
+          <div className="flex overflow-hidden w-full">
+            <motion.div
+              className="flex items-center gap-16 px-8 whitespace-nowrap"
+              initial={{ x: "-50%" }}
+              animate={{ x: "0%" }}
+              transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+            >
+              {marqueeSponsors.map((sponsor, idx) => (
+                <div key={idx} className="flex items-center gap-4 group opacity-50 hover:opacity-100 transition-all duration-300 cursor-pointer">
+                  <div className="relative w-8 h-8 shrink-0">
+                    <Image
+                      src={sponsor.image}
+                      alt={sponsor.name}
+                      fill
+                      className="object-contain brightness-0 invert"
+                    />
+                  </div>
+                  <span className="text-lg font-bold text-white tracking-wide">{sponsor.name}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <style jsx>{`
-        @keyframes gradientShift {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
+      {/* 
+        SPONSOR GRID SECTION 
+      */}
+      <section className="relative px-8 py-32 md:px-16 z-10">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-24"
+          >
+            <p className="text-white/40 text-lg mb-4">Trusted by the best</p>
+            <h3 className="text-3xl md:text-5xl font-bold">Our Esteemed Partners</h3>
+          </motion.div>
 
-        @keyframes float {
-          0% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-
-      {/* Past Sponsors */}
-      <section className="py-20 bg-gradient-to-b from-[#1A0000] via-black to-[#1A0000]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-6 text-[#FF3A3A]">
-            OUR ESTEEMED PARTNERS
-          </h2>
-          <p className="text-gray-400 mb-12 max-w-2xl">
-            We thank our sponsors for their continued support and commitment to
-            making our events successful and impactful.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { name: "LIC", image: "/nsponsor/LIC.png" },
-              { name: "Aria", image: "/nsponsor/aria.jpg" },
-              {
-                name: "Herody App",
-                image: "/nsponsor/herody.png",
-              },
-              { name: "GDX", image: "/sponsors/GDX.png" },
-              { name: "StudCops", image: "/sponsors/StudCops.png" },
-              {
-                name: "ReduceIT",
-                image: "/nsponsor/reduceit.jpg",
-              },
-              { name: "BCH", image: "/sponsors/bch.png" },
-              { name: "Nescafe", image: "/sponsors/nescafe.jpg" },
-              { name: "StartupNews.fyi", image: "/nsponsor/startupnews.png" },
-            ].map((sponsor, index) => (
-              <div
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
+            {sponsors.map((sponsor, index) => (
+              <motion.div
                 key={index}
-                className="group relative bg-black/20 border border-[#FF3A3A]/10 rounded-lg p-6 hover:border-[#FF3A3A]/50 transition-all hover:scale-105"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ scale: 1.05, filter: "brightness(1.2)" }}
+                className="group flex flex-col items-center justify-center p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/10 transition-all cursor-pointer aspect-[4/3]"
               >
-                <div className="aspect-square relative mb-4 overflow-hidden">
+                <div className="relative w-full h-full p-4">
                   <Image
                     src={sponsor.image}
-                    alt={`${sponsor.name} logo`}
+                    alt={sponsor.name}
                     fill
-                    className="object-contain p-4 filter grayscale group-hover:grayscale-0 transition-all transform group-hover:scale-110"
+                    className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                 </div>
-                <div className="text-center">
-                  <h3 className="font-bold text-lg mb-1">{sponsor.name}</h3>
+                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-sm text-white/50">
+                  {sponsor.name}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
-      {/* <ImmersiveForm /> */}
+
     </main>
-  );
-}
-
-function SponsorShowcase() {
-  const [currentSponsor, setCurrentSponsor] = useState(0);
-  const sponsors = [
-    {
-      name: "LIC",
-      image: "/nsponsor/LIC.png",
-      description: "Leading insurance provider ensuring your future",
-    },
-    {
-      name: "Aria",
-      image: "/nsponsor/aria.jpg",
-      description: "Innovative solutions for a sustainable future",
-    },
-    {
-      name: "Herody App",
-      image: "/nsponsor/herody.png",
-      description: "Connecting heroes with opportunities",
-    },
-    {
-      name: "GDX",
-      image: "/sponsors/GDX.png",
-      description: "Revolutionizing security experiences",
-    },
-    {
-      name: "StudCops",
-      image: "/sponsors/StudCops.png",
-      description: "Empowering students with essential tools",
-    },
-    {
-      name: "ReduceIT",
-      image: "/nsponsor/reduceit.jpg",
-      description: "Innovative IT solutions for modern businesses",
-    },
-    {
-      name: "BCH",
-      image: "/sponsors/bch.png",
-      description: "Building a healthier community",
-    },
-    {
-      name: "Nescafe",
-      image: "/sponsors/nescafe.jpg",
-      description: "Bringing people together over coffee",
-    },
-    {
-      name: "StartupNews.fyi",
-      image: "/nsponsor/startupnews.png",
-      description: "Your daily dose of startup news",
-    },
-  ];
-
-  const nextSponsor = useCallback(() => {
-    setCurrentSponsor((prev) => (prev + 1) % sponsors.length);
-  }, [sponsors.length]);
-
-  const prevSponsor = useCallback(() => {
-    setCurrentSponsor((prev) => (prev - 1 + sponsors.length) % sponsors.length);
-  }, [sponsors.length]);
-
-  useEffect(() => {
-    const timer = setInterval(nextSponsor, 5000);
-    return () => clearInterval(timer);
-  }, [nextSponsor]);
-
-  return (
-    <div className="mb-12 relative text-center">
-      <p className="text-xl font-semibold mb-4 text-[#ff4747]">
-        Featured <span className="text-white">Sponsors</span>
-      </p>
-      <div className="relative overflow-hidden rounded-xl mx-auto shadow-lg border border-gray-700/30 bg-gray-800 w-[95%] sm:w-[700px] h-[500px] sm:h-[400px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSponsor}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.6 }}
-            className="relative w-full h-full"
-          >
-            <Image
-              src={sponsors[currentSponsor].image}
-              alt={sponsors[currentSponsor].name}
-              fill
-              className="rounded-xl object-cover filter brightness-75 hover:brightness-100 transition-all"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 flex items-end p-4">
-              <h3 className="text-lg font-bold text-white">
-                {sponsors[currentSponsor].name}
-              </h3>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-        <button
-          onClick={prevSponsor}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-700/80 transition-colors"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={nextSponsor}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-700/50 text-white p-2 rounded-full hover:bg-gray-700/80 transition-colors"
-        >
-          <ChevronRight size={20} />
-        </button>
-      </div>
-      <p className="text-sm mt-4 text-gray-400">
-        {sponsors[currentSponsor].description}
-      </p>
-    </div>
   );
 }
