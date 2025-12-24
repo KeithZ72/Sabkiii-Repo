@@ -51,6 +51,8 @@ export default function SponsorshipPage() {
       <section className="relative h-screen flex flex-col z-10">
 
         {/* Header */}
+        {/* Header */}
+        {/* Header */}
         <header className="flex justify-between items-center px-8 py-6 md:px-16 md:py-8 z-50">
           <div className="text-3xl font-black tracking-tighter text-[#E62B1E]">
             TED
@@ -63,25 +65,15 @@ export default function SponsorshipPage() {
         </header>
 
         {/* Hero Content - Reverted to Centered/Left Layout without Spline */}
-        <div className="flex-grow flex flex-col justify-center px-8 md:px-16 max-w-7xl mx-auto w-full pb-32">
+        <div className="flex-grow flex flex-row items-center justify-between px-8 md:px-16 max-w-7xl mx-auto w-full pb-32 relative">
 
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full flex justify-center mb-8"
-          >
-            <h2 className="text-lg md:text-xl font-medium tracking-[0.2em] text-white/80 uppercase">
-              MEET OUR SPONSORS
-            </h2>
-          </motion.div>
-
-          <div className="max-w-3xl">
+          <div className="max-w-3xl z-10">
             <motion.h1
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-4xl md:text-6xl font-bold leading-[1.2]"
+              // Reduced font size by approx 5% (text-4xl is 36px -> ~34px, text-6xl is 60px -> ~57px)
+              className="text-[2.15rem] md:text-[3.56rem] font-bold leading-[1.2]"
             >
               Bigger <span className="text-[#B52D2D]">Goals</span>,<br />
               Better Together.
@@ -96,6 +88,32 @@ export default function SponsorshipPage() {
               Empowering individuals and teams at the world's leading organizations. We build the future, one partnership at a time.
             </motion.p>
           </div>
+
+          {/* 3D X Element - Neon Implementation */}
+          <div className="hidden md:block absolute right-0 top-[40%] -translate-y-1/2 mr-16 lg:mr-24 pointer-events-none z-10">
+            <div className="relative w-80 h-80 [perspective:1000px]">
+              <motion.div
+                animate={{ rotateY: 360, rotateX: 10 }}
+                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                className="w-full h-full [transform-style:preserve-3d]"
+              >
+                {/* 
+                    NEON X (Double-sided)
+                 */}
+                {/* Bar 1 (/) */}
+                <div className="absolute top-1/2 left-1/2 w-80 h-20 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-full border-[3px] border-[#ff3333] bg-[#2a0000]/80 backdrop-blur-md shadow-[0_0_25px_#ff0000,inset_0_0_15px_#800000] flex items-center justify-center">
+                  {/* Inner glowing core */}
+                  <div className="w-[90%] h-3 bg-red-50 rounded-full blur-[2px] shadow-[0_0_10px_#fff,0_0_20px_#f00]" />
+                </div>
+
+                {/* Bar 2 (\) */}
+                <div className="absolute top-1/2 left-1/2 w-80 h-20 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-full border-[3px] border-[#ff3333] bg-[#2a0000]/80 backdrop-blur-md shadow-[0_0_25px_#ff0000,inset_0_0_15px_#800000] flex items-center justify-center">
+                  <div className="w-[90%] h-3 bg-red-50 rounded-full blur-[2px] shadow-[0_0_10px_#fff,0_0_20px_#f00]" />
+                </div>
+
+              </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Ribbon (Marquee) */}
@@ -108,7 +126,8 @@ export default function SponsorshipPage() {
               className="flex items-center gap-16 px-8 whitespace-nowrap"
               initial={{ x: "-50%" }}
               animate={{ x: "0%" }}
-              transition={{ repeat: Infinity, ease: "linear", duration: 40 }}
+              key="slow-marquee" // Force re-render to apply new duration
+              transition={{ repeat: Infinity, ease: "linear", duration: 120 }} // Duration is in seconds. Higher = Slower.
             >
               {marqueeSponsors.map((sponsor, idx) => (
                 <div key={idx} className="flex items-center gap-4 group opacity-50 hover:opacity-100 transition-all duration-300 cursor-pointer">
@@ -129,8 +148,8 @@ export default function SponsorshipPage() {
       </section>
 
       {/* 
-        SPONSOR GRID SECTION 
-      */}
+      SPONSOR GRID SECTION 
+    */}
       <section className="relative px-8 py-32 md:px-16 z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
