@@ -1,21 +1,19 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import ComputersScene from "@/components/ComputersScene";
 
 export default function SponsorshipPage() {
   const sponsors = [
-    { name: "LIC", image: "/nsponsor/LIC.png" },
-    { name: "Aria", image: "/nsponsor/aria.jpg" },
-    { name: "Herody App", image: "/nsponsor/herody.png" },
-    { name: "GDX", image: "/sponsors/GDX.png" },
-    { name: "StudCops", image: "/sponsors/StudCops.png" },
-    { name: "ReduceIT", image: "/nsponsor/reduceit.jpg" },
-    { name: "BCH", image: "/sponsors/bch.png" },
-    { name: "Nescafe", image: "/sponsors/nescafe.jpg" },
-    { name: "StartupNews.fyi", image: "/nsponsor/startupnews.png" },
-    { name: "Meta", image: "/nsponsor/LIC.png" },
-    { name: "Google", image: "/nsponsor/aria.jpg" },
-    { name: "Microsoft", image: "/nsponsor/herody.png" },
+    { name: "TechVision", image: "/nsponsor/generated/logo_v2_1.png" },
+    { name: "DataFlow", image: "/nsponsor/generated/logo_v2_2.png" },
+    { name: "CloudSync", image: "/nsponsor/generated/logo_v2_3.png" },
+    { name: "AI Nexus", image: "/nsponsor/generated/logo_v2_4.png" },
+    { name: "SecureGuard", image: "/nsponsor/generated/logo_v2_5.png" },
+    { name: "DataMetrics", image: "/nsponsor/generated/logo_v2_6.png" },
+    { name: "MobileFirst", image: "/nsponsor/generated/logo_v2_7.png" },
+    { name: "FinFlow", image: "/nsponsor/generated/logo_v2_1.png" }, // Reusing v2_1 due to quota
+    { name: "CloudWorks", image: "/nsponsor/generated/logo_v2_2.png" }, // Reusing v2_2 due to quota
   ];
 
   const marqueeSponsors = [...sponsors, ...sponsors, ...sponsors, ...sponsors];
@@ -23,27 +21,10 @@ export default function SponsorshipPage() {
   return (
     <main className="relative min-h-screen w-full text-white font-sans selection:bg-[#B52D2D] selection:text-white overflow-x-hidden">
 
-      {/* GLOBAL BACKGROUND - FIXED */}
-      <div className="fixed inset-0 z-0">
-        <div
-          className="absolute inset-0 w-full h-full opacity-60"
-          style={{
-            // Slightly increased blue intensity (approx 7% more)
-            background: "linear-gradient(135deg, #000000 0%, #050525 45%, #000000 65%, #B52D2D 100%)",
-            backgroundSize: "400% 400%",
-            animation: "gradientMove 15s ease infinite alternate"
-          }}
-        />
-        <div className="absolute inset-0 bg-black/40" />
+      {/* 3D BACKGROUND SCENE */}
+      <div className="fixed inset-0 z-0 w-full h-full pointer-events-auto">
+        <ComputersScene sponsors={sponsors} />
       </div>
-
-      <style jsx global>{`
-        @keyframes gradientMove {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
 
       {/* 
         HERO SECTION 
@@ -55,7 +36,7 @@ export default function SponsorshipPage() {
         {/* Header */}
         <header className="flex justify-between items-center px-8 py-6 md:px-16 md:py-8 z-50">
           <div className="text-3xl font-black tracking-tighter text-[#E62B1E]">
-            TED
+            TEDx
           </div>
 
           <button className="group flex items-center gap-2 px-6 py-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 transition-all text-sm font-medium tracking-wide backdrop-blur-sm">
@@ -68,52 +49,10 @@ export default function SponsorshipPage() {
         <div className="flex-grow flex flex-row items-center justify-between px-8 md:px-16 max-w-7xl mx-auto w-full pb-32 relative">
 
           <div className="max-w-3xl z-10">
-            <motion.h1
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              // Reduced font size by approx 5% (text-4xl is 36px -> ~34px, text-6xl is 60px -> ~57px)
-              className="text-[2.15rem] md:text-[3.56rem] font-bold leading-[1.2]"
-            >
-              Bigger <span className="text-[#B52D2D]">Goals</span>,<br />
-              Better Together.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-6 text-white/60 text-sm md:text-base max-w-md leading-relaxed"
-            >
-              Empowering individuals and teams at the world's leading organizations. We build the future, one partnership at a time.
-            </motion.p>
+            {/* Header Text removed as per request */}
           </div>
 
-          {/* 3D X Element - Neon Implementation */}
-          <div className="hidden md:block absolute right-0 top-[40%] -translate-y-1/2 mr-16 lg:mr-24 pointer-events-none z-10">
-            <div className="relative w-80 h-80 [perspective:1000px]">
-              <motion.div
-                animate={{ rotateY: 360, rotateX: 10 }}
-                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                className="w-full h-full [transform-style:preserve-3d]"
-              >
-                {/* 
-                    NEON X (Double-sided)
-                 */}
-                {/* Bar 1 (/) */}
-                <div className="absolute top-1/2 left-1/2 w-80 h-20 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-full border-[3px] border-[#ff3333] bg-[#2a0000]/80 backdrop-blur-md shadow-[0_0_25px_#ff0000,inset_0_0_15px_#800000] flex items-center justify-center">
-                  {/* Inner glowing core */}
-                  <div className="w-[90%] h-3 bg-red-50 rounded-full blur-[2px] shadow-[0_0_10px_#fff,0_0_20px_#f00]" />
-                </div>
-
-                {/* Bar 2 (\) */}
-                <div className="absolute top-1/2 left-1/2 w-80 h-20 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-full border-[3px] border-[#ff3333] bg-[#2a0000]/80 backdrop-blur-md shadow-[0_0_25px_#ff0000,inset_0_0_15px_#800000] flex items-center justify-center">
-                  <div className="w-[90%] h-3 bg-red-50 rounded-full blur-[2px] shadow-[0_0_10px_#fff,0_0_20px_#f00]" />
-                </div>
-
-              </motion.div>
-            </div>
-          </div>
+          {/* 3D Scene handles the visuals now, removing Neon X */}
         </div>
 
         {/* Bottom Ribbon (Marquee) */}
@@ -150,7 +89,7 @@ export default function SponsorshipPage() {
       {/* 
       SPONSOR GRID SECTION 
     */}
-      <section className="relative px-8 py-32 md:px-16 z-10">
+      <section className="relative px-8 py-32 md:px-16 z-10 bg-gradient-to-b from-black to-[#240605]">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
